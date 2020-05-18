@@ -1,0 +1,31 @@
+{% extends 'core.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <title>Reading {{ blog.title }}</title>
+</head>
+    <div class="container py-5" id="blogpage">
+        <h3 class="card-title"> {{ blog.title }}</h3>
+            <small class="text-muted" style="font-size: .7em;">Created : {{ blog.date }} </small><br>
+            <small class="text-muted" style="font-size: .7em;">Total : {{ total_likes }} Like{{total_likes | pluralize}} </small>
+            <p id="content" class="card-text mt-4"> {{ blog.content }}</p>
+            {% if user.is_authenticated %}
+                <form method="POST" action={% url 'like_post' %}>
+                {% csrf_token %}
+
+                {% if is_liked %}
+                <button type="submit" class="btn btn btn-danger" name="blog_id" value="{{ blog.id}}"> Unlike</button>
+                {% else %}
+                <button type="submit" class="btn btn-success" name="blog_id" value="{{ blog.id}}"> Like</button>
+                {% endif %}
+
+                </form>
+            {% endif %}
+            
+            {% if user.is_authenticated and user.id == blog.author_id %}
+            <br><br><a type="button" class="btn btn-outline-dark" style="font-size: .7em;" href="/edit/id={{ blog.id }}">Edit </a>  <a type="button" class="btn btn-outline-danger" style="font-size: .7em;" href="/delete/id={{blog.id}}"> Delete </a>
+            {% endif %}
+    </div>
+
+{% endblock content %}
+

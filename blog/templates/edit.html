@@ -1,0 +1,46 @@
+{% extends 'core.html' %}
+
+{% block content %}
+
+<head>
+    <title>Edit Your Blog</title>
+</head>
+<body>
+<form class="container py-5" method='POST' name="edit">
+{% csrf_token %}
+    <div class="form-row">
+        <div class="col-md-3">
+            <h3>Edit Your Blog</h3>
+        </div>
+    </div>
+    <div class="form-row">		
+		<label for="validationDefault01" class="col-sm-0 col-form-label" style="font-size: 1.1em;">Title :</label>
+        <div class="col-md-3 mb-3">
+			<input type="text" class="form-control" id="validationDefault01" name="bname" value="{{edit_blog.title}}" required>
+		</div>
+    </div>
+    <div class="form-row">
+        <label for="validationDefault02" class="col-sm-0 col-form-label" style="font-size: 1.1em;">Blog :</label>
+        <div class="col-md-11 mb-3">
+        <textarea class="form-control" id="validationDefault02" rows="5" name="body" >{{edit_blog.content}}</textarea>
+        </div>
+    </div>
+    <div class="form-row ">
+        <div class="col-sm-1 ">
+            <button class="btn btn-dark" type="submit">Update</button>
+        </div>
+    </div>
+    <br><a type="button" class="btn btn-outline-danger" style="font-size: .7em;" href="/delete/id={{edit_blog.id}}"> Delete Blog</a>
+</form>
+    
+{% for message in messages%}
+<div class="container pb-4">
+  <div class="row ">
+    <div class="col-md-4">
+     <i class="fas fa-check"></i> {{message}}        
+    </div>        
+  </div>
+</div> 
+{% endfor %}
+
+{% endblock content %}

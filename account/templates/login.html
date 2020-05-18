@@ -1,0 +1,46 @@
+{% extends 'core.html' %}
+{% block content %}
+
+<head>
+    <title>User Log In | Blogex</title>
+</head>
+
+<form class="container py-5" method="POST" action="login">
+{% csrf_token %}
+  <div class="form-row justify-content-center">
+			<div class="col-md-3">
+				<h3 >ACCOUNT LOGIN</h3>
+			</div>
+  </div>
+  <div class="form-row justify-content-center">
+			<div class="col-md-3 mb-3">
+				<label for="validationDefault01" >Username</label>
+				<input type="text" class="form-control" id="validationDefault01" name="username" required>
+			</div>
+  </div>
+  <div class="form-row justify-content-center">
+    <div class="col-md-3 mb-3">
+      <label for="validationDefault02">Password</label>
+      <input type="password" class="form-control" id="validationDefault02" name="password" required>
+    </div>
+	</div>
+	<div class="form-row justify-content-center">
+    <div class="col-md-3 text-left">
+			<button class="btn btn-dark align-content-center" type="submit">Log In</button>
+    </div>
+	</div>
+</form>
+
+	
+{% for message in messages%}
+<div class="container pb-4">
+  <div class="row justify-content-center">
+    <div class="col-md-3">
+      {{message}}        
+    </div>        
+  </div>
+</div> 
+{% endfor %}
+
+
+{% endblock content %}

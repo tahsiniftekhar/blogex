@@ -1,0 +1,70 @@
+{% extends 'core.html' %}
+
+{% block content %}
+<head>
+    <title>Blogs | Blogex</title>
+</head>
+<div class="container py-5">
+
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <!--<h2>Blog List</h2>-->
+        </div>
+        <div class="col-md-6 text-right">
+            <h5><a href='/write'>Write a new</a></h5>
+        </div>
+    </div>
+    <div id="bloglist" class="row">
+            {% for blog in page_obj %}
+        <div class="col-md-4">
+            <div class="card border-light my-4" style="max-width: 23rem;">
+            <a href="/blogs/id={{ blog.id }}">
+            <div class="card-body text-dark">
+                <h5 class="card-title">{{ blog.title }}</h5>
+                <hr>
+                <p class="card-text" style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical;">{{ blog.content }}</p>
+                <small class="text-muted" style="font-size: .7em;">{{ blog.date }}</small>
+            </div>
+            </a>
+            </div>     
+        </div>
+            {% endfor %}         
+    </div>
+</div>
+
+
+
+
+
+<nav aria-label="Page navigation example">
+    <div class="row ">
+        <div class="col-md-12 text-center py-1" style="font-size: 0.89em;">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}        
+        </div>
+    </div>
+    <ul class="pagination pagination-sm justify-content-center">
+
+        {% if page_obj.has_previous %}
+        <li class="page-item" >
+            <a class="page-link" href="?page=1">&laquo; first</a>
+        </li>
+        <li class="page-item" >
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">previous</a>
+        </li>
+        {% endif %}
+
+        {% if page_obj.has_next %}
+        <li class="page-item" >
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">next</a>
+        </li>
+        <li class="page-item" >
+                <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        </li>
+        {% endif %}
+
+    </ul>
+<nav>
+{% endblock content %}
+
+
+               <!-->

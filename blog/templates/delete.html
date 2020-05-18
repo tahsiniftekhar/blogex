@@ -1,0 +1,19 @@
+{% extends 'core.html' %}
+
+{% block content %}
+
+<head>
+    <title>Delete Blog</title>
+</head>
+<body>
+    <div class="container py-5" id="blogpage">
+        <h2 class="mb-5">Are you sure want to delete this Blog ?</h2>
+        <h4 class="card-title "> {{delete_blog.title}}</h4>
+        <p id="content" class="card-text mt-4"> {{ delete_blog.content }}</p>
+        <form method='POST' name="delete">
+        {% csrf_token %}
+            <button class="btn btn-danger" type="submit">Delete</button>
+        </form>
+    </div>
+
+{% endblock content %}
